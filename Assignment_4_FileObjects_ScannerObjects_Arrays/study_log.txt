@@ -1,0 +1,123 @@
+may 8 1300 1420 classlec uvic
+
+may 9 1330 1520 classlab uvic
+
+may 11 1100 1245 read cac
+
+may 11 1300 1420 classlec uvic 
+
+may 11 1430 1530 help office
+
+may 12 1000 1100 read house
+
+may 12 1200 1300 assignment1 house
+
+may 14 1400 2000 assignment1 house
+
+
+
+may 15 1040 1100 help cac
+
+may 15 1300 1420 classlec uvic
+
+may 15 1440 1520 help office 
+
+may 15 1700 2200 assignment1 house
+
+may 16 1330 1520 classlab uvic
+
+may 17 0900 1100 assignment1 house
+
+may 18 1300 1420 classlec uvic
+
+
+
+may 20 1000 1200 read house 
+
+may 23 1040 1300 read library
+
+may 23 1900 2200 assignment2 house
+
+may 24 1000 1110  read library
+
+may 24 1400 1530 read library 
+
+may 24 1600 1700 assignment2 library
+
+may 25 1300 1420 classlec uvic
+
+may 25 1600 2100 assignment2 house
+
+
+
+may 26 1300 1830 assignment2 cafe
+
+may 27 1600 1800 assignment2 cafe
+
+may 28 1700 1900 assignment2 house
+
+may 29 1300 1420 classlec uvic
+
+may 30 1130 1320 classlab uvic
+
+may 30 1600 1900 assignment3 home
+
+may 31 1900 2100 read library
+
+june 1 1300 1420 classlec uvic
+
+june 2 1800 2000 assignment3 home
+
+june 3 1900 2100 assignment3 home
+
+
+
+june 5 1020 1250 assignment3 cac
+
+june 5 1300 1420 classlec uvic
+
+june 5 1600 2200 study home 
+
+june 6 1000 1100 study library
+
+june 6 1130 1320 classlab uvic
+
+june 6 1500 2200 study home
+
+june 7 1000 1120 study library
+
+june 7 1500 2200 study home 
+
+june 8 1015 1230 study library
+
+june 8 1300 1420 exam uvic
+
+
+june 12 1100 1240 read library
+
+june 12 1300 1420 classlec uvic
+
+june 13 1130 1320 classlab uvic
+
+june 14 1030 1120 read library
+
+june 15 1130 1250 read library
+
+june 15 1300 1320 help office
+
+june 16 1230 1730 assignment4 library
+
+june 16 1740 1900 read library
+
+
+june 19 1300 1420 classlec uvic
+
+june 19 1440 1500 help office
+
+june 19 1530 1730 assignment4 library
+
+june 20 1130 1320 classlab uvic
+
+june 20 1500 1600 assignment4 home
+
+june 21 1530 1700 assignment4 home

@@ -1,13 +1,15 @@
 /*
 * Name: <Shabab Ali>
+* Student Number: <V00651717>
 * Program Name: <StudyStats>
-* Program Description: <A Java program (verified compiler - JDK8u131) that processes a study log file and generates student information.
-						The program utilizes: 
+* Program Description: A Java program (verified compiler - JDK8u131) that processes a study log file and generates student information.
+					   The program utilizes: 
 						 - procedural decomposition to break down a problem into methods.
 						 - while loops to process variable length input.
 						 - File class to read from a file.
-						 - Scanner to process user input.
+						 - Scanner to process file data.
 						 - Arrays to process data.
+						
 */
 
 
@@ -19,7 +21,7 @@ import java.io.FileNotFoundException;
 public class StudyStats {
 
 	
-	
+
   public static final int MAX = 5000;
   
   static String[] months = new String[MAX];
@@ -29,8 +31,8 @@ public class StudyStats {
   static String[] activities = new String[MAX];
   static String[] locations = new String[MAX];
   // n is an index for 'file-information populated' elements in the arrays.
-  // n is established in correlation with the implementation of Scanner reading 
-  // a new line, containing String and integer input tokens in the Program's File object.  
+  // n is established concomitantly with the implementation of Scanner reading a new line. 
+  // Each new line in the Program's File object is a study record that contains String and integer input tokens.  
   static int n = 0;  
   
   
@@ -43,8 +45,8 @@ public class StudyStats {
 	
 		int timeHours = (time/100);
 		int timeMin = time % 100;
-		int minAfterMidNight = (timeHours*60) + timeMin;
-		return minAfterMidNight;
+		int minAfterMidnight = (timeHours*60) + timeMin;
+		return minAfterMidnight;
 
 	} // end method int timeInMins(int time)
   
@@ -69,15 +71,15 @@ public class StudyStats {
 	
 	public static double aveStudyMins() {
     
-		int timespanSum = 0;
-		double timespanAverage;
+		int timespanStudySum = 0;
+		double timespanStudyAverage;
 	
 		for (int i =0;i<n;i++) {
-			timespanSum += entryMins(start[i], stop [i]);
+			timespanStudySum += entryMins(start[i], stop [i]);
 		}
-		timespanAverage = (double)timespanSum/n;
+		timespanStudyAverage = (double)timespanStudySum/n;
 	
-		return timespanAverage;
+		return timespanStudyAverage;
   
 	} // end method double aveStudyMins()
   
@@ -90,20 +92,20 @@ public class StudyStats {
 	public static int maxStudyTimeEntry() {
 	
 		int max = 0;
-		int indexMaxStudyTime = 0;
+		int indexMaxTimespanStudy = 0;
 	
 		for (int i=0;i<n;i++) {
 	
-			int timespan = entryMins(start[i], stop[i]);
-			if (timespan > max) {
-				//store max timespan value of the iterated set of study records
-				max = timespan; 
-				//store index position of max timespan value
-				indexMaxStudyTime = i;
+			int timespanStudy = entryMins(start[i], stop[i]);
+			if (timespanStudy > max) {
+				//store max study timespan value of the iterated study records (lines).
+				max = timespanStudy; 
+				//store index position of max timespan value record
+				indexMaxTimespanStudy = i;
 			}	
 
 		}
-		return indexMaxStudyTime;
+		return indexMaxTimespanStudy;
 
 	} // end method int maxStudyTimeEntry()
   
@@ -154,7 +156,7 @@ public class StudyStats {
   
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		File inF = new File("study_log_check.txt");
+		File inF = new File("study_log.txt");
 		Scanner inputF = new Scanner(inF);
     
 		while (inputF.hasNextLine()) {
