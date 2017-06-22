@@ -1,6 +1,5 @@
 /*
 * Name: <Shabab Ali>
-* Student Number: <V00651717>
 * Program Name: <StudyStats>
 * Program Description: A Java program (verified compiler - JDK8u131) that processes a study log file and generates student information.
 					   The program utilizes: 
