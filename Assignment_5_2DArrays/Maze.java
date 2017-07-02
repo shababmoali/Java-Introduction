@@ -21,6 +21,10 @@ import java.util.Arrays;
 
 
 public class Maze {
+	
+	
+	// Scanner object console stores user inputs.
+	public static Scanner console = new Scanner(System.in);
 
 
 	public static int rows;
@@ -42,11 +46,31 @@ public class Maze {
   }
    
   
+  
+  // 
   public static void printRoute(int[][] a, Point p) {
-    // you need to setup your parameters
-    
-    // your code here
-  }
+
+    int rows = a.length; // 1st dimension of 2D Array - analogous to global variable r
+    int cols = a[0].length; // 2nd dimension of 2D Array - analogous to global variable cols
+
+    for (int i=rows-1; i>=0; i--) {
+
+      for (int j=0; j<cols; j++) {
+
+        if (p.x == j && p.y == i) {
+          System.out.print("X");
+          a[i][j] = 1;
+        } else if (a[i][j] == 0) {
+          System.out.print("#");
+        } else {
+          System.out.print(".");
+        }
+
+      }
+      System.out.println();
+    }
+
+  } // end method printRoute(int[][] a, Point p)
   
   public static void printDirections() {
     // you need to setup your parameters
@@ -73,14 +97,20 @@ public class Maze {
 	File inF = new File ("maze.txt");
 	Scanner inputF = new Scanner(inF);
 	
+	// Obtain a grid of rows and columns from inputF File object - "maze.txt"
+	// and establish 2D Array map dimensions
 	rows = inputF.nextInt();
 	cols = inputF.nextInt();
 	
 	map = new int [rows][cols];
 	
-	for (int i=0;i<rows;i++) {
+	// fill maze info into 2D int Array map. Rows are read in reverse order to create 
+	// refference semantics that follow a Cartesian Plane. Therefore, grid positions 
+	// in the 2D Array map can be refferenced with a Point object analogous to a Cartesian (x,y) co-oridnate.
+	// ie Point (0,0) will be map [row:0][cols:0]
+	for (int i=rows-1; i>=0; i--) {
 		
-		for (int j=0;j<cols;j++) {
+		for (int j=0; j<cols; j++) {
 				map[i][j] = inputF.nextInt();
 		}
 		
@@ -98,9 +128,9 @@ public class Maze {
 	System.out.println (cols);
 
 	System.out.println();
-	for (int i=0;i<rows;i++) {
+	for (int i=rows-1; i>=0; i--) {
 		
-		for (int j=0;j<cols;j++) {
+		for (int j=0; j<cols; j++) {
 				System.out.print(map[i][j]);
 		}
 		System.out.println();
@@ -111,19 +141,52 @@ public class Maze {
   
   
   
+  // method introOutput() prints an introduction script to the console and
+  // prompts the user to start the game.
+  public static void introOutput() {
+
+	System.out.println("\n------------------");
+    System.out.println("Welcome to the maze!");
+    System.out.println("Your current position is marked with an X.");
+    System.out.println("To leave, find your way to the top-right corner.");
+    System.out.print("Press Enter to start!");
+    console.nextLine();
+
+  } // end method introOutput()
+  
+  
+  
+  // method finishOutput() prints a game finished script to the console.
+  public static void finishOutput() {
+	  
+	System.out.println("\n------------------");
+    System.out.println("Congratulations!");
+    System.out.println("You finished the maze!");  
+	  
+  } // end method finishOutput()
+  
+  
+  
   public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
     
-    
-	// read map information from 'maze.txt' and store map in 2D array: map [rows][cols]  
+	// read map information from 'maze.txt' and store map in 2D array: map [rows][cols].  
 	generateMap();
 	
-	//test method to printMap from global map variables: rows, cols and 2D array map
+	// start game.
+	introOutput();
+	
+	// test method to printMap from global map variables: rows, cols and 2D array map.
 	printMap();
 	
 
 	
 	
+	Point p = new Point (0,0);
+	printRoute(map,p);
 	
+	
+	// finish game.
+	finishOutput();
 	
   } // end method main(String[] args)
   
