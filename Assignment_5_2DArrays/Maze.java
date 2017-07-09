@@ -1,7 +1,7 @@
 /*
 * Name: <Shabab Ali>
 * Program Name: <Maze>
-* Program Description: <A Java program (verified compiler - JDK8u131) that
+* Program Description: <A Java program (verified compiler - JDK8u131 run on Windows 7) that
 						lets a user play a game navigating a maze. The program utilizes:
 						- procedural decomposition to break down a problem into methods.
 						- File class to read from a file.
@@ -14,9 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.awt.Point;
-
 import java.io.IOException;
-import java.util.Arrays;
 
 
 
@@ -25,10 +23,10 @@ public class Maze {
 	
 	
 	// Scanner object console stores user inputs.
-	public static Scanner console = new Scanner(System.in);
+  public static Scanner console = new Scanner(System.in);
 
-	public static int rows;
-	public static int cols;
+  public static int rows;
+  public static int cols;
 	
 	
 /*  
@@ -42,27 +40,28 @@ public class Maze {
    
   // method clearScreen() will clear the Console screen in WINDOWS 7. 
   public static void clearScreen() throws IOException, InterruptedException {
-    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-  }
+  
+	new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+  
+  } // end method clearScreen()
   
   
   
-  // method generateMap() creates a File object and Scanner object to read maze grid informtation from 'maze.txt' file. 
+  // method generateMap() creates a File object and Scanner object to read maze grid informtation from the 'maze.txt' file. 
   // The method - 1)stores dimension information into global variables: rows (row numbers) and cols (column numbers) - 
-  // 2)returns the 2D Array map ([rows][cols]).
+  // 2)returns a 2D Array map ([rows][cols]) of the 'maze.txt' blueprint.
   public static int[][] generateMap() throws FileNotFoundException {
 	  
 	File inF = new File ("maze.txt");
 	Scanner inputF = new Scanner(inF);
 	
-	// Obtain a grid of rows and columns from inputF File object - "maze.txt"
-	// and establish 2D Array map dimensions
+	// Obtain a grid of rows and columns from inputF File object - "maze.txt" and establish 2D Array map dimensions.
 	rows = inputF.nextInt();
 	cols = inputF.nextInt();
 	
-	int [][] map = new int [rows][cols];
+	int[][] map = new int [rows][cols];
 	
-	// fill maze info into 2D int Array map. Rows are read in reverse order to create 
+	// fill maze information into 2D Array map. Rows are read in reverse order to create 
 	// reference semantics that follow a Cartesian Plane. Therefore, grid positions 
 	// in the 2D Array map can be referenced with a Point object analogous to a Cartesian (x,y) co-ordinate.
 	// ie Point (0,0) will be map [row:0][cols:0]
@@ -100,7 +99,7 @@ public class Maze {
 	
 	}
   
-  } // end method printMap()
+  } // end method printMap(int[][] m)
   
    
      
@@ -120,8 +119,8 @@ public class Maze {
   
   
   
-  // method printRoute(int[][] a, Point p) updates the route tracking history by assigning values to the route 2D Array.
-  // The method uses the Point object p parameter to reference the 2D Array's grid and print the user position 'X', 
+  // method printRoute(int[][] a, Point p) prints the gameplay route 2D Array.
+  // The method uses the Point object p parameter to reference the 2D Array's grid and prints the current user position 'X', 
   // unchartered default array positions are printed with '#' and the route track with '.'  
   public static void printRoute(int[][] a, Point p) {
 
@@ -144,8 +143,8 @@ public class Maze {
   
   
   
-  // method updateRoute(int[][] a, Point p) updates the game 2D Array route by using the Point p object
-  // as a reference to convert the default array value from 0 to 1, leaving a user route history.  
+  // method updateRoute(int[][] a, Point p) updates the gameplay route 2D Array by using the Point p object
+  // as a reference to convert the default array value from 0 to 1, leaving a user route track history.  
   public static void updateRoute(int[][] a, Point p) {
 
 	for (int i=rows-1; i>=0; i--) {
@@ -178,7 +177,7 @@ public class Maze {
 	System.out.println("------------------");
     System.out.print("Which way will you go? ");
 	
-  } // end method printDirections()
+  } // end method printDirections(boolean left, boolean right, boolean up, boolean down)
   
   
   
@@ -200,7 +199,7 @@ public class Maze {
     }
     return true;
     
-  } // end method updatePosition()
+  } // end method updatePosition(String response, boolean left, boolean right, boolean up, boolean down, Point p)
   
 
   
@@ -231,7 +230,6 @@ public class Maze {
   
   public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
     
-	
 	// Read map information from 'maze.txt' and store map in 2D Array: map [rows][cols]. 
 	// Also, assign values for global map dimension variables rows and cols.   
 	int[][] gameMap = generateMap();
@@ -249,7 +247,7 @@ public class Maze {
 	
 	// initialize GAMEPLAY variables
 	boolean blocked = false; //default setting is not blocking to allow for a userResponse to updatePosition
-    boolean leftOption, rightOption, upOption, downOption; 
+	boolean leftOption, rightOption, upOption, downOption; 
 	String userResponse;
 	
 	// GAMEPLAY
@@ -264,7 +262,7 @@ public class Maze {
 	
 		// Print 2D Array gameRoute to the console. 
 		printRoute(gameRoute, p);
-		System.out.println(p);
+		System.out.println();
 		
 		// if boolean conditions are true, user can move in the direction, therefore method updatePosition() moves the Point object and returns true,
 		// else method updatePosition() does not move Point object and returns false. Furthermore, boolean blocked is assigned true and user/console will receive warning.
@@ -288,10 +286,8 @@ public class Maze {
 	clearScreen();
     printRoute(gameRoute, p);
 	
-	
 	// print finish game script to user.
 	finishOutput();
-	
 	
   } // end method main(String[] args)
   
