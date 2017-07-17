@@ -19,6 +19,7 @@ public class Sprite {
 	height = f.nextInt();
 	width = f.nextInt();
 	// remember to call an extra nextLine() after nextInt() when reading the file
+	// java Scanner has a bug calling nextLine() after nextInt()  
 	f.nextLine();
     
     // setup the characters in array art	
@@ -60,10 +61,11 @@ public class Sprite {
   
   public void draw() {
     
-	// Establish dimensions of Screen object that will receive characters from the Sprite object.
-	// Bottom left corner ie art(x,y) = art(0,0) of the Sprite object. 
-	// The screen origin or corner position Point p is instantiated by
-	// instance method setCorner() call in method main of Program class Picture.
+	// Establish the dimensions in the Screen object that will receive characters from the Sprite object.
+	// Bottom left corner of the Sprite object is art(0,0) 
+	//   ie astract the 2D Sprite array art[rows][columns] to art(x,y) for drawing to a Screen object - panel. 
+	// Instance method setCorner(), called in main(), assigns the screen origin and inherent Sprite corner position Point p.
+	// Screen instance method set(), draws Sprite characters to the correpsonding Screen grid.
 	int startY = (int)p.y;
 	int stopY = (int)p.y + (height-1);
 	int startX = (int)p.x;
