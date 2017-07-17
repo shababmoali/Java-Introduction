@@ -1,6 +1,5 @@
 /*
 * Name: <Shabab Ali>
-* Student Number: <V00651717>
 * Program Name: <Picture>
 * Program Description: <A Java program (verified compiler - JDK8u131 run on Windows 7) that
 						reads ASCII art from a file and prints the file and animations to the screen. 
