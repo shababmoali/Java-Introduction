@@ -3,11 +3,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Sprite {
+	
   Screen panel;
   private char[][] art;
   Point p;
   int width;
   int height;
+  
   
   // this is the constructor we want to use when initializing objects
   public Sprite(String filename) throws FileNotFoundException {
@@ -35,22 +37,26 @@ public class Sprite {
       
 	}
   
-  }
+  } // end Sprite(String filename) constructor
+  
   
   public void setCorner(double x, double y) {
     // set up Point p
 	p = new Point(x,y);
   }
   
+  
   public void put(Screen panel) {
     // set up Screen panels
 	this.panel = panel;
   }
   
+  
   public char get(int x, int y) {
-	  return art[y][x];
-    // return the entry in array art
+	// return the entry in array art
+	return art[y][x];
   }
+  
   
   public void draw() {
     
@@ -69,7 +75,6 @@ public class Sprite {
 		
 		int xChar = 0;
 		for (int j=startX; j<=stopX; j++) {
-			//System.out.print((art[i][j]));
 			// don't draw space chars to panel
 			if (get(xChar,yChar) != ' ') {
 				panel.set( j, i, get(xChar,yChar) );
@@ -77,13 +82,10 @@ public class Sprite {
 			xChar++;
 		}
 		yChar++;
-		//System.out.print(" 			" + y);
-		//System.out.print(" 			" + x);
-		//System.out.println();
 
-	}
-	
+	} 
     
-    
-  }
-}
+  } // end draw()
+  
+  
+} // end class Sprite
