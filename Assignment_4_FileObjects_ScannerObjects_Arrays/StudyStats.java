@@ -116,8 +116,8 @@ public class StudyStats {
 	
 	public static void printEntry(int k) {
 		
-		System.out.print( months[k] + " " );
-		System.out.print( days[k] + " " );
+		System.out.printf("%5s ",  months[k]);
+		System.out.printf("%02d ", days[k]);
 		System.out.printf("%04d ", start[k]);
 	    System.out.printf("%04d ", stop[k]);
 	    System.out.print( activities[k] + " " );
