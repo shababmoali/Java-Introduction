@@ -33,12 +33,10 @@ public class Picture {
       double rx = rand.nextInt(a.width + 4) + (a.p.x - 2); //Screen domain [-2x from Sprite corner to +2x from Sprite end]
       double ry = rand.nextInt(a.height + 4) + (a.p.y - 2); //Screen range [-2y from Sprite corner to +2y from Sprite end]
       pts[i] = new Point( rx, ry );
-      // prep for drawing by connectin to a Screen object
+      // prep for drawing by connecting to a Screen object
       pts[i].put(panel);
-    }
-	// draw random generated points to the Screen object
-	for (int i=0; i<pts.length; i++) {
-      pts[i].draw('*');
+	  // draw random generated points to the Screen object
+	  pts[i].draw('*');
     }
 	
   } // end method fillBarnacles(Sprite a, Screen panel)
@@ -78,9 +76,10 @@ public class Picture {
 		  alien[i].setCorner(r.nextInt(125)+5, r.nextInt(25)+5);	  
 		  // draw 25 random '*' characters inside a Sprite object 2 char boundary
 		  fillBarnacles(alien[i], window);
+		  // connect alien instance to Screen object window
+		  alien[i].put(window);
 		  // draw Sprite alien instances (non-blank space characters only) 
 		  // over the Barnacles onto the Screen object window
-		  alien[i].put(window);
 		  alien[i].draw();
 	  }  
 		
