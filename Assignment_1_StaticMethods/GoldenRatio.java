@@ -1,7 +1,7 @@
 /*
 * Name: <Shabab Ali>
 * Program Name: <GoldenRatio>
-* Program Description: <A Java program (verified compiler - JDK8u131) that approximates Phi and tests the Fibonnaci Sequence, 
+* Program Description: <A Java program (verified compiler - JDK8u131 on Windows 7) that approximates Phi and tests the Fibonnaci Sequence, 
 						concomitantly generating Fibonacci sequence themed ASCII art.>
 */
 
