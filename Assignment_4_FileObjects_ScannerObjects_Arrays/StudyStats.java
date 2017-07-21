@@ -73,7 +73,7 @@ public class StudyStats {
 		int timespanStudySum = 0;
 		double timespanStudyAverage;
 	
-		for (int i =0;i<n;i++) {
+		for (int i=0; i<n; i++) {
 			timespanStudySum += entryMins(start[i], stop [i]);
 		}
 		timespanStudyAverage = (double)timespanStudySum/n;
@@ -93,7 +93,7 @@ public class StudyStats {
 		int max = 0;
 		int indexMaxTimespanStudy = 0;
 	
-		for (int i=0;i<n;i++) {
+		for (int i=0; i<n; i++) {
 	
 			int timespanStudy = entryMins(start[i], stop[i]);
 			if (timespanStudy > max) {
@@ -119,8 +119,8 @@ public class StudyStats {
 		System.out.printf("%5s ",  months[k]);
 		System.out.printf("%02d ", days[k]);
 		System.out.printf("%04d ", start[k]);
-	    System.out.printf("%04d ", stop[k]);
-	    System.out.print( activities[k] + " " );
+		System.out.printf("%04d ", stop[k]);
+		System.out.print( activities[k] + " " );
 		System.out.println( locations[k] + " " );
 	
 	} // end method printEntry(int k)
