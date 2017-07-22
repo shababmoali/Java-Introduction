@@ -9,6 +9,8 @@ public class SortPoints {
     
   }
   
+  
+  
   // return  1: Points are in correct order
   // return  0: No need to swap equal Points
   // return -1: Points are out of order
@@ -74,26 +76,63 @@ public class SortPoints {
   public static boolean equidistant(Point[] pts, Point p) {
     int n = pts.length;
     
-    // find two closest Points to p
-    
+	// find two closest Points to p
+	
+	// vairables for minimum distances
+    double d1 = 99;
+    double d2 = 99;
+    double d;
+	
+	for (int i=0; i<n; i++) {
+
+		d = dist( p, pts[i] );  
+		
+		if ( d < d1 ) {
+		// closest distance
+		d2 = d1;
+		d1 = d;
+		} else if ( d < d2 ) {
+		// second closest distance
+		d2 = d;
+		}	
+
+	} 
     
     // if absolute value of difference of 2 minimum distances
     // is below 3.0 then return true
-    
-    // for compiling, you can change this if/when needed
-    return false;
+    if (Math.abs(d2-d1) < 3.0 ) {
+		return true;
+	}
+	else {
+		// for compiling, you can change this if/when needed
+		return false;
+	}
+
   }
   
   public static void voronoi(Screen window, Point[] pts) {
     // create a Point for each position in the Screen to check
     // i.e. Point p = new Point(i + 0.5, j + 0.5);  // centre of character at col i, row j
-    
+    for (int i=0; i<window.rows; i++) {
+		
+		for (int j=0; j<window.cols; j++) {
+			
+			Point p = new Point( (double)i , (double)j );
+			if ( equidistant( pts, p) ) {
+				window.set( j, i, '.' );
+			}
+		}
+		
+	}
+	
+	
   }
   
   public static void drawDiagram(Screen window, Point[] pts) {
     window.clear();
     
     // draw voronoi diagram first once you finish code for it
+	voronoi( window, pts);
     
     // need to use a centre point
     Point c = new Point(window.cols / 2.0, window.rows / 2.0);
@@ -147,7 +186,7 @@ public class SortPoints {
     
     // create Points from input Scanner
 	Point[] pts = new Point[numOfPts];
-	System.out.println(numOfPts);
+	//System.out.println(numOfPts);
 	//System.out.println(Arrays.deepToString(inFpts));    
 	
 	
