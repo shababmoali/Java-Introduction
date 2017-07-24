@@ -78,28 +78,27 @@ public class SortPoints {
     
 	// find two closest Points to p
 	
-	// vairables for minimum distances
+	// vairables for minimum distances`	
     double d1 = 99;
     double d2 = 99;
     double d;
 	
 	for (int i=0; i<n; i++) {
 
-		d = dist( p, pts[i] );  
+		d = dist(pts[i], p);  
 		
-		if ( d < d1 ) {
-		// closest distance
-		d2 = d1;
-		d1 = d;
-		} else if ( d < d2 ) {
-		// second closest distance
-		d2 = d;
+		if (d < d1) {
+			// closest distance
+			d2 = d1;
+			d1 = d;
+		} else if (d < d2) {
+			// second closest distance
+			d2 = d;
 		}	
 
 	} 
     
-    // if absolute value of difference of 2 minimum distances
-    // is below 3.0 then return true
+    // if absolute value of difference of 2 minimum distances is below 3.0 then return true
     if (Math.abs(d2-d1) < 3.0 ) {
 		return true;
 	}
@@ -112,14 +111,14 @@ public class SortPoints {
   
   public static void voronoi(Screen window, Point[] pts) {
     // create a Point for each position in the Screen to check
-    // i.e. Point p = new Point(i + 0.5, j + 0.5);  // centre of character at col i, row j
+    // i.e. Point p = new Point(i + 0.5, j + 0.5);  // centre of character at col j, row i
     for (int i=0; i<window.rows; i++) {
 		
 		for (int j=0; j<window.cols; j++) {
 			
-			Point p = new Point( (double)i , (double)j );
-			if ( equidistant( pts, p) ) {
-				window.set( j, i, '.' );
+			Point p = new Point((double)j,(double)i);
+			if (equidistant(pts, p)) {
+				window.set(j, i, '.');
 			}
 		}
 		
