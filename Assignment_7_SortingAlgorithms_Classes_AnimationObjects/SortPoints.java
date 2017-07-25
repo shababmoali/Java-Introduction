@@ -6,8 +6,12 @@ public class SortPoints {
   
   // swap objects between index i and index j
   public static void swap(Point[] pts, int i, int j) {
-    
-  }
+	  
+	Point temp = pts[i];
+	pts[i] = pts[j];
+	pts[j] = temp;
+	    
+  } // end swap(Point[] pts, int i, int j)
   
   
   
@@ -15,6 +19,7 @@ public class SortPoints {
   // return  0: No need to swap equal Points
   // return -1: Points are out of order
   public static int readCompare(Point p1, Point p2) {
+	  
     // only care about the position in Screen as an integer
     int x1 = (int)Math.floor(p1.x);
     int y1 = (int)Math.floor(p1.y);
@@ -22,22 +27,49 @@ public class SortPoints {
     int y2 = (int)Math.floor(p2.y);
     
     // check for top to bottom order
-    
-    // at this spot in code then Points p1 and p2 should be in same row
+	if (y1 > y2) {
+		return 1;
+	} else if (y1 < y2) {
+		return -1;
+	}
+	// at this spot in code then Points p1 and p2 should be in same row
     // so check for left to right order
+	if (x1 < x2) {
+		return 1;
+	} else if (x1 > x2) {
+		return -1;
+	// at this spot in code position of p1 should equal position of p2
+	} else {
+		return 0;
+	}
     
-    // at this spot in code position of p1 should equal position of p2
-    
-    // for compiling, you can change this if/when needed
-    return 0;
-  }
+  } // end readCompare(Point p1, Point p2)
+  
+
+  
+  
   
   // write Selection Sort using readCompare
   public static void readSort(Screen window, Point[] pts) {
-    int n = pts.length;
     
-    // Selection Sort here
-  }
+	int n = pts.length;
+    
+    // Selection Sort:
+	for (int i=0; i<n-1; i++) {
+		
+		int iMin = i;
+		for (int j=i+1; j<n; j++) {
+			if (readCompare(pts[iMin], pts[j]) == -1) {	
+                iMin = j;
+			}
+		}
+		swap(pts, i, iMin);
+	
+	}
+	
+  } // readSort(Screen window, Point[] pts)
+  
+  
   
   // return  1: Point p1 is closer to p3
   // return  0: Points p1 and p2 are roughly equidistant from p3
@@ -54,6 +86,8 @@ public class SortPoints {
     
     return 0;
   }
+
+
   
   // write a Bubble Sort using distCompare from centre of Screen as comparison
   public static void distSort(Screen window, Point[] pts) {
@@ -62,7 +96,23 @@ public class SortPoints {
     int w = window.cols;
     Point c = new Point(w/2.0, h/2.0); // centre Point
     
-    // Bubble Sort here
+    // Bubble Sort:
+	// set flag to true to begin first Sort pass
+	boolean flag = true; 
+	
+	while (flag) {
+		//set flag to false awaiting a possible swap
+		flag = false; 
+        for(int j=1; j<n; j++ ) {
+			// if Point pts[j] is closer to Point c (center): swap Point[] elements  
+			if (distCompare(pts[j-1], pts[j], c) == -1) {	
+                swap(pts, j-1, j);
+				// record the occurence of a swap
+				flag = true;  
+			}
+		} 
+    } 
+		
   }
   
   // get the distance of Point p1 from Point p2
@@ -79,8 +129,8 @@ public class SortPoints {
 	// find two closest Points to p
 	
 	// vairables for minimum distances`	
-    double d1 = 99;
-    double d2 = 99;
+    double d1 = 999;
+    double d2 = 999;
     double d;
 	
 	for (int i=0; i<n; i++) {
@@ -101,9 +151,7 @@ public class SortPoints {
     // if absolute value of difference of 2 minimum distances is below 3.0 then return true
     if (Math.abs(d2-d1) < 3.0 ) {
 		return true;
-	}
-	else {
-		// for compiling, you can change this if/when needed
+	} else {
 		return false;
 	}
 
@@ -114,8 +162,7 @@ public class SortPoints {
     // i.e. Point p = new Point(i + 0.5, j + 0.5);  // centre of character at col j, row i
     for (int i=0; i<window.rows; i++) {
 		
-		for (int j=0; j<window.cols; j++) {
-			
+		for (int j=0; j<window.cols; j++) {			
 			Point p = new Point((double)j,(double)i);
 			if (equidistant(pts, p)) {
 				window.set(j, i, '.');
@@ -125,7 +172,9 @@ public class SortPoints {
 	}
 	
 	
-  }
+  } // end voronoi()
+  
+  
   
   public static void drawDiagram(Screen window, Point[] pts) {
     window.clear();
@@ -175,6 +224,19 @@ public class SortPoints {
 	window.draw();
   }
   
+  
+  public static void printPoints(Point[] pts) {
+	  
+  	for (int i=0; i<pts.length; i++) {
+		
+		System.out.printf("%,03.9f  ",pts[i].x);
+		System.out.printf("%,02.9f",pts[i].y);
+		System.out.println();
+	
+	}
+	
+  }
+  
   public static void main(String[] args) {
     // setup Scanner
 	Scanner console = new Scanner (System.in);
@@ -213,13 +275,23 @@ public class SortPoints {
     drawDiagram(window, pts);
     
     // sort pts in order from centre of Screen
-    //distSort(window, pts);
+    distSort(window, pts);
     
-    //drawDiagram(window, pts);
+	//sort testing method
+	printPoints(pts);
+	
+    drawDiagram(window, pts);
+	
+
     
     // sort pts in order of reading top left to bottom right
-    //readSort(window, pts);
+    readSort(window, pts);
+	
+	//sort testing method
+	printPoints(pts);
     
-    //drawDiagram(window, pts);
+    drawDiagram(window, pts);
+	
+
   }
 }
