@@ -1,10 +1,32 @@
+/*
+* Name: <Shabab Ali>
+* Program Name: <SortPoints>
+* Program Description: <A Java program (verified compiler - JDK8u131 run on Windows 7) that
+						reads Catesian Points (x,y) from a file and processes the Points - 
+						(i) sorting by distance from a center Point
+						(ii) sorting by position nearest to top-left Point 
+						The file Points are rendered to the console via a Screen object. 
+						The program overviews:
+						- procedural decomposition to break down a problem into methods.
+						- using custom Classes in a client program.
+						- reading a file in to a program from the command line.
+						- write Selection Sort code.
+						- write Bubble Sort code.
+						- sorting of elements based on your own comparisons.
+						- create a voronoi diagram.>
+*/
+
+
+
 import java.util.Scanner;
-import java.util.Arrays;
+
 
 
 public class SortPoints {
+
   
-  // swap objects between index i and index j
+  // method swap(Point[] pts, int i, int j): swaps elements between index i and index j
+  // in a Point Array object. Point is a custom Class with attributes and behaviour that emulate Cartesian points.
   public static void swap(Point[] pts, int i, int j) {
 	  
 	Point temp = pts[i];
@@ -15,6 +37,8 @@ public class SortPoints {
   
   
   
+  // method int readCompare(Point p1, Point p2) evaluates 2 Points on a cartesian plane (x,y),
+  // with respect to proximity to the top-left corner:
   // return  1: Points are in correct order
   // return  0: No need to swap equal Points
   // return -1: Points are out of order
@@ -43,13 +67,12 @@ public class SortPoints {
 		return 0;
 	}
     
-  } // end readCompare(Point p1, Point p2)
+  } // end int readCompare(Point p1, Point p2)
   
 
   
-  
-  
-  // write Selection Sort using readCompare
+  // method readSort(Screen window, Point[] pts) implements Selection Sort 
+  // using readCompare to sort Point array []pts.
   public static void readSort(Screen window, Point[] pts) {
     
 	int n = pts.length;
@@ -67,14 +90,17 @@ public class SortPoints {
 	
 	}
 	
-  } // readSort(Screen window, Point[] pts)
+  } // end readSort(Screen window, Point[] pts)
   
   
   
+  // method int distCompare(Point p1, Point p2, Point p3) evaluates 2 Points on a cartesian plane (x,y),
+  // with respect to proximity to a common/center Point p3:
   // return  1: Point p1 is closer to p3
   // return  0: Points p1 and p2 are roughly equidistant from p3
   // return -1: Point p2 is closer to p3
   public static int distCompare(Point p1, Point p2, Point p3) {
+	  
     double d1 = dist(p1, p3);
     double d2 = dist(p2, p3);
     
@@ -85,11 +111,13 @@ public class SortPoints {
       return -1;
     
     return 0;
-  }
+  
+  } // end int distCompare(Point p1, Point p2, Point p3)
 
 
   
-  // write a Bubble Sort using distCompare from centre of Screen as comparison
+  // method distSort(Screen window, Point[] pts) implements Bubble Sort
+  // using distCompare from centre of Screen as comparison.
   public static void distSort(Screen window, Point[] pts) {
     int n = pts.length;
     int h = window.rows;
@@ -113,30 +141,39 @@ public class SortPoints {
 		} 
     } 
 		
-  }
+  } // end distSort(Screen window, Point[] pts)
   
-  // get the distance of Point p1 from Point p2
+  
+  
+  // method double dist(Point p1, Point p2) returns the distance of Point p1 from Point p2.
+  // Point objects are arranged in an elliptical spiral to match the aspect ratio of the Screen.
   public static double dist(Point p1, Point p2) {
+	  
+	// vertical distance has been scaled to contribute 3 times because
+	// the Screen object is defined to have roughly three times as much width as there is height
     double dx = p1.x - p2.x;
-    double dy = 3.0*(p1.y - p2.y);
+	double dy = 3.0*(p1.y - p2.y);
     return Math.sqrt(dx*dx + dy*dy);
-  }
   
-  // are two closest Points in pts array equidistant to Point p?
+  } // end double dist(Point p1, Point p2)
+
+
+
+  // method boolean equidistant(Point[] pts, Point p) determines whether
+  // two closest Points in pts array are equidistant to a Point p parameter?
   public static boolean equidistant(Point[] pts, Point p) {
-    int n = pts.length;
-    
+
+	int n = pts.length;
+
+	// vairables for minimum distances
+	double d;
+	double d1 = 999;
+	double d2 = 999;
+
 	// find two closest Points to p
-	
-	// vairables for minimum distances`	
-    double d1 = 999;
-    double d2 = 999;
-    double d;
-	
 	for (int i=0; i<n; i++) {
 
-		d = dist(pts[i], p);  
-		
+		d = dist(pts[i], p);
 		if (d < d1) {
 			// closest distance
 			d2 = d1;
@@ -144,20 +181,25 @@ public class SortPoints {
 		} else if (d < d2) {
 			// second closest distance
 			d2 = d;
-		}	
+		}
 
-	} 
-    
-    // if absolute value of difference of 2 minimum distances is below 3.0 then return true
-    if (Math.abs(d2-d1) < 3.0 ) {
+	}
+
+	// if absolute value of difference of 2 minimum distances is below 3.0 then return true
+	if (Math.abs(d2-d1) < 3.0 ) {
 		return true;
 	} else {
 		return false;
 	}
 
-  }
-  
+  } // end method equidistant(Point[] pts, Point p)
+
+
+
+  // method voronoi(Screen window, Point[] pts) draws '.' char boundaries around a set of points,
+  // so that any position on the boundary is equidistant from its two closest points.
   public static void voronoi(Screen window, Point[] pts) {
+
     // create a Point for each position in the Screen to check
     // i.e. Point p = new Point(i + 0.5, j + 0.5);  // centre of character at col j, row i
     for (int i=0; i<window.rows; i++) {
@@ -170,12 +212,13 @@ public class SortPoints {
 		}
 		
 	}
-	
-	
-  } // end voronoi()
+
+  } // end voronoi(Screen window, Point[] pts)
   
   
   
+  // method drawDiagram(Screen window, Point[] pts) draws the points (from pts[] array) on a Screen 
+  // and labels each Point in the order they are listed in the array from A to S.
   public static void drawDiagram(Screen window, Point[] pts) {
     window.clear();
     
@@ -225,6 +268,7 @@ public class SortPoints {
   }
   
   
+  // printPoints(Point[] pts) prints pts[] array contents, useful method for program building. 
   public static void printPoints(Point[] pts) {
 	  
   	for (int i=0; i<pts.length; i++) {
@@ -235,63 +279,56 @@ public class SortPoints {
 	
 	}
 	
-  }
-  
+  } // end printPoints(Point[] pts)
+
+
+
   public static void main(String[] args) {
+
     // setup Scanner
 	Scanner console = new Scanner (System.in);
-    int numOfPts = console.nextInt();
+	int numOfPts = console.nextInt();
 	
-    // create a Screen
+	// create a Screen
 	Screen window = new Screen();
-    
-    // create Points from input Scanner
+	
+	// create Points from input Scanner
 	Point[] pts = new Point[numOfPts];
 	//System.out.println(numOfPts);
-	//System.out.println(Arrays.deepToString(inFpts));    
-	
-	
+
 	for (int i=0; i<pts.length; i++) {
 		double x = console.nextDouble();
 		double y = console.nextDouble();
 		pts[i] = new Point(x,y);
 	}
-	 
-	
-	
-	/* Scanner output verification:
-	for (int i=0; i<inFpts.length; i++) {
-		
-		System.out.printf("%,03.9f  ",inFpts[i].x);
-		System.out.printf("%,02.9f",inFpts[i].y);
-		System.out.println();
-	
-	}
-	*/
-	
-    // remember to call put for each Point to connect to a Screen
-    
+
+	//Point[] testing method prints file import result:
+	//printPoints(pts);
+
     // draw pts and labels
     drawDiagram(window, pts);
-    
+	System.out.println("\n\n\n");
+
     // sort pts in order from centre of Screen
     distSort(window, pts);
-    
-	//sort testing method
-	printPoints(pts);
-	
-    drawDiagram(window, pts);
-	
 
-    
-    // sort pts in order of reading top left to bottom right
-    readSort(window, pts);
+	//check distSort() resulting sort on pts[] in order of distance from center
+	//printPoints(pts);
 	
-	//sort testing method
-	printPoints(pts);
-    
-    drawDiagram(window, pts);
+	drawDiagram(window, pts);
+	System.out.println("\n\n\n");
 	
+	// sort pts in order of reading top left to bottom right
+	readSort(window, pts);
 
-  }
-}
+	////check readSort() resulting sort on pts[] in order of reading top left to bottom right
+	//printPoints(pts);
+
+    drawDiagram(window, pts);
+	System.out.println("\n\n\n");
+
+
+  } // end method main()
+
+
+} // end Program class SortPoints
