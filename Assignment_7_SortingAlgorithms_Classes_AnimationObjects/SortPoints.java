@@ -165,7 +165,7 @@ public class SortPoints {
 
 	int n = pts.length;
 
-	// vairables for minimum distances
+	// variables for minimum distances
 	double d;
 	double d1 = 999;
 	double d2 = 999;
