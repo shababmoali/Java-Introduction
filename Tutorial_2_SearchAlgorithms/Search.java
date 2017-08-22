@@ -4,6 +4,7 @@ import java.util.Arrays;
 public class Search {
 
 
+
 	// method boolean linearSearch(int[] A, int k) iterates through the array
 	// to find int k and returns true if found. Time complexity O(n).
 	public static boolean linearSearch(int[] A, int k) {
@@ -18,6 +19,29 @@ public class Search {
 		return false;
 	
 	} // end method boolean linearSearch(int[] A, int k)
+	
+
+	
+	// method secondSmallest(int[] A) iterates through an int[] Array A
+	// and returns the second smallest number. Time complexity O(n).
+	public static int secondSmallest(int[] A) {
+		
+		int min = 1000000;
+		int min2 = 1000000;
+		
+		for (int i=0; i<A.length; i++) {
+			if (A[i] < min) {
+				min2 = min;
+				min = A[i];				
+			} else if (A[i] < min2) {
+				min2 = A[i];
+			}
+		}
+		
+		return min2;
+		
+	} // end method secondSmallest(int[] A)
+
 
 	
 	// method boolean binarySearch(int[] A, int k) partitions a sorted array
